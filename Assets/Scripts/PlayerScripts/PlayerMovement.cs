@@ -38,15 +38,15 @@ public class PlayerMovement : MonoBehaviour
             var tanangle = Mathf.Atan2(horizontalMovement, verticalMovement) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, tanangle, 0);
         }
-        
 
-        //if (Mathf.Abs(rb.velocity.z) > 0f || Mathf.Abs(rb.velocity.x) > 0f)
-        //{
-        //    animator.SetBool("isWalking", true);
-        //}
-        //else
-        //{
-        //    animator.SetBool("isWalking", false);
-        //}
+
+        if(!(verticalMovement == 0f && horizontalMovement == 0f))
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 }
