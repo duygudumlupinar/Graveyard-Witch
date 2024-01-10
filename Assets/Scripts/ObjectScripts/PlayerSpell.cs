@@ -21,10 +21,11 @@ public class PlayerSpell : MonoBehaviour
     {
         if(collision.collider.CompareTag(targetTag))
         {
-            print("Enemy");
+            collision.gameObject.GetComponent<EnemyAttack>().TriggerAttack();
             //collision.Health().HandleDamage(damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        
     }
 
     private IEnumerator DestroySpell()

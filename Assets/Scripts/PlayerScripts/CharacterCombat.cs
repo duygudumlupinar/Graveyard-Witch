@@ -12,6 +12,7 @@ public class CharacterCombat : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
