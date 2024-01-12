@@ -30,7 +30,7 @@ public class EnemyAttack : MonoBehaviour
     private void Attack()
     {
         animator.SetBool("isAttacking", true);
-        Instantiate(enemySpell, firePoint.transform.position, firePoint.transform.rotation);
+        StartCoroutine(CreateSpell());
         StartCoroutine(EndAttack());
         isAttacking = false;
     }
@@ -40,6 +40,12 @@ public class EnemyAttack : MonoBehaviour
         isAttacking = true;
     }
 
+    private IEnumerator CreateSpell()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(enemySpell, firePoint.transform.position, firePoint.transform.rotation);
+    }
+    
     private IEnumerator EndAttack()
     {
         yield return new WaitForSeconds(2);

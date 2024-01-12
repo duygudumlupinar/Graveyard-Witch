@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Enemy
   speed: 5
-  damage: 50
+  damage: 10
 --- !u!54 &6392282036526932013
 Rigidbody:
   m_ObjectHideFlags: 0

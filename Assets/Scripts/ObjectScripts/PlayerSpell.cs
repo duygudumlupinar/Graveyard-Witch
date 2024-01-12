@@ -7,7 +7,7 @@ public class PlayerSpell : MonoBehaviour
 {
     public string targetTag;
     public float speed = 5;
-    public float damage = 50;
+    public int damage = 50;
     private Rigidbody rb;
 
     void Start()
@@ -21,8 +21,16 @@ public class PlayerSpell : MonoBehaviour
     {
         if(collision.collider.CompareTag(targetTag))
         {
-            collision.gameObject.GetComponent<EnemyAttack>().TriggerAttack();
-            //collision.Health().HandleDamage(damage);
+            if(targetTag == "Enemy")
+            {
+                collision.gameObject.GetComponent<EnemyAttack>().TriggerAttack();
+                collision.gameObject.GetComponent<Health>().HandleDamage(damage);
+            }
+            else if (targetTag == "Player")
+            {
+                collision.gameObject.GetComponent<PlayerHealth>().HandleDamage(damage);
+            }
+            
             Destroy(gameObject);
         }
         
