@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -17,6 +18,9 @@ public class Health : MonoBehaviour
 
         if (healthPoints <= 0)
         {
+            Object winLose = FindAnyObjectByType(typeof(WinLose));
+            winLose.GetComponent<WinLose>().EnemyDown();
+
             Destroy(gameObject);
             //play death audio
         }
