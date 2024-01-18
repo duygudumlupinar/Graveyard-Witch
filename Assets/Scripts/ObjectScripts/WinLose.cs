@@ -13,6 +13,7 @@ public class WinLose : MonoBehaviour
     void Start()
     {
         numberOfCoffins = 0;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void CoffinFilled()
@@ -21,23 +22,25 @@ public class WinLose : MonoBehaviour
         {
             numberOfCoffins++;
         }
-        else if (numberOfCoffins == 4)
+        if (numberOfCoffins == 4)
         {
             // PLAYER LOSES
             // lose cutscene 
             //restartTheGame();
+            print("Lost");
         }
     }
 
     public void EnemyDown()
     {
-        print("enemy down");
-        if (numberOfEnemies > 0)
+        //There must be at least four enemies to fill all the coffins.
+        if (numberOfEnemies > 3)
         {
             numberOfEnemies--;
         }
-        else if (numberOfEnemies == 0)
+        else
         {
+            print("Won");
             // PLAYER WINS
             // win cutscene
             audioSource.Play();

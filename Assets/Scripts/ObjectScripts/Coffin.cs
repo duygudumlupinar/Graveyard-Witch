@@ -15,7 +15,7 @@ public class Coffin : MonoBehaviour
             {
                 other.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 other.GetComponent<EnemyAttack>().enabled = false;
-                other.gameObject.transform.Rotate(new Vector3(-90f, 0f, -90f), Space.Self);
+                //other.gameObject.transform.Rotate(new Vector3(-90f, 0f, -90f), Space.Self);
                 StartCoroutine(ShutDownCoffin(other));
 
                 Object winLose = FindAnyObjectByType(typeof(WinLose));
@@ -26,7 +26,7 @@ public class Coffin : MonoBehaviour
 
     IEnumerator ShutDownCoffin(Collider other)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForEndOfFrame();
         //Destroy(other.gameObject);
         transform.Rotate(new Vector3(0f, 0f, -90f), Space.Self);
         _light.enabled = false;
