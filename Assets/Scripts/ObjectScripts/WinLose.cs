@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 
 public class WinLose : MonoBehaviour
 {
+    public PlayableDirector winCutsceneDirector;
+    public PlayableDirector loseCutsceneDirector;
+    public AudioSource bgMusic;
+    public GameObject enemyParent;
+
     public int numberOfEnemies;
     public int numberOfCoffins;
-
-    private AudioSource audioSource;
 
     void Start()
     {
         numberOfCoffins = 0;
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void CoffinFilled()
@@ -22,11 +26,13 @@ public class WinLose : MonoBehaviour
         {
             numberOfCoffins++;
         }
-        if (numberOfCoffins == 4)
+        if (numberOfCoffins == 1)
         {
             // PLAYER LOSES
-            // lose cutscene 
-            //restartTheGame();
+            enemyParent.SetActive(false);
+            bgMusic.Stop();
+            StartCoroutine(playEndingCutscene(loseCutsceneDirector)); 
+            StartCoroutine(restartTheGame(((float)loseCutsceneDirector.duration)));
             print("Lost");
         }
     }
@@ -42,14 +48,22 @@ public class WinLose : MonoBehaviour
         {
             print("Won");
             // PLAYER WINS
-            // win cutscene
-            audioSource.Play();
-            //restartTheGame();
+            enemyParent.SetActive(false);
+            bgMusic.Stop();
+            StartCoroutine(playEndingCutscene(winCutsceneDirector));
+            StartCoroutine(restartTheGame(((float)winCutsceneDirector.duration)));
         }
     }
 
-    void restartTheGame()
+    IEnumerator playEndingCutscene(PlayableDirector playableDirector)
     {
+        yield return new WaitForSeconds(2);
+        playableDirector.Play();
+    }
+
+    IEnumerator restartTheGame(float duration)
+    {
+        yield return new WaitForSeconds(duration);
         SceneManager.LoadScene("SampleScene");
     }
 }
