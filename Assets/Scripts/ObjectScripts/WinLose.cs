@@ -26,27 +26,24 @@ public class WinLose : MonoBehaviour
         {
             numberOfCoffins++;
         }
-        if (numberOfCoffins == 1)
+        if (numberOfCoffins == 4)
         {
             // PLAYER LOSES
             enemyParent.SetActive(false);
             bgMusic.Stop();
             StartCoroutine(playEndingCutscene(loseCutsceneDirector)); 
             StartCoroutine(restartTheGame(((float)loseCutsceneDirector.duration)));
-            print("Lost");
         }
     }
 
     public void EnemyDown()
     {
-        //There must be at least four enemies to fill all the coffins.
-        if (numberOfEnemies > 3)
+        if (numberOfEnemies > 0)
         {
             numberOfEnemies--;
         }
-        else
+        if(numberOfEnemies == 0)
         {
-            print("Won");
             // PLAYER WINS
             enemyParent.SetActive(false);
             bgMusic.Stop();
@@ -64,6 +61,6 @@ public class WinLose : MonoBehaviour
     IEnumerator restartTheGame(float duration)
     {
         yield return new WaitForSeconds(duration);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("StartScene");
     }
 }

@@ -4953,7 +4953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Enemy
   speed: 5
-  damage: 20
+  damage: 40
 --- !u!82 &-927950791092089677
 AudioSource:
   m_ObjectHideFlags: 0
